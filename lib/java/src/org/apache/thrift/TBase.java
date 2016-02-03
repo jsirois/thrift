@@ -19,35 +19,10 @@
 
 package org.apache.thrift;
 
-import java.io.Serializable;
-
-import org.apache.thrift.protocol.TProtocol;
-
 /**
- * Generic base interface for generated Thrift objects.
- *
+ * Generic base interface for mutable generated Thrift objects.
  */
-public interface TBase<T extends TBase<T,F>, F extends TFieldIdEnum> extends Comparable<T>,  TSerializable, Serializable {
-
-  /**
-   * Get the F instance that corresponds to fieldId.
-   */
-  public F fieldForId(int fieldId);
-
-  /**
-   * Check if a field is currently set or unset.
-   *
-   * @param field
-   */
-  public boolean isSet(F field);
-
-  /**
-   * Get a field's value by field variable. Primitive types will be wrapped in
-   * the appropriate "boxed" types.
-   *
-   * @param field
-   */
-  public Object getFieldValue(F field);
+public interface TBase<T extends TBase<T, F>, F extends TFieldIdEnum> extends TImmutableBase<T, F>, TSerializable {
 
   /**
    * Set a field's value by field variable. Primitive types must be "boxed" in
@@ -55,13 +30,13 @@ public interface TBase<T extends TBase<T,F>, F extends TFieldIdEnum> extends Com
    *
    * @param field
    */
-  public void setFieldValue(F field, Object value);
+  void setFieldValue(F field, Object value);
 
-  public T deepCopy();
+  T deepCopy();
 
   /**
    * Return to the state of having just been initialized, as though you had just
    * called the default constructor.
    */
-  public void clear();
+  void clear();
 }

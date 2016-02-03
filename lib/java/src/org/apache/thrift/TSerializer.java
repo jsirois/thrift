@@ -74,7 +74,7 @@ public class TSerializer {
    * @param base The object to serialize
    * @return Serialized object in byte[] format
    */
-  public byte[] serialize(TBase base) throws TException {
+  public byte[] serialize(TImmutableBase base) throws TException {
     baos_.reset();
     base.write(protocol_);
     return baos_.toByteArray();
@@ -88,7 +88,7 @@ public class TSerializer {
    * @param charset Valid JVM charset
    * @return Serialized object as a String
    */
-  public String toString(TBase base, String charset) throws TException {
+  public String toString(TImmutableBase base, String charset) throws TException {
     try {
       return new String(serialize(base), charset);
     } catch (UnsupportedEncodingException uex) {
@@ -103,7 +103,7 @@ public class TSerializer {
    * @param base The object to serialize
    * @return Serialized object as a String
    */
-  public String toString(TBase base) throws TException {
+  public String toString(TImmutableBase base) throws TException {
     return new String(serialize(base));
   }
 }

@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
 package org.apache.thrift;
 
 import java.nio.ByteBuffer;
@@ -36,8 +37,8 @@ import thrift.test.TestUnion;
 public class TestTDeserializer extends TestCase {
 
   private static final TProtocolFactory[] PROTOCOLS = new TProtocolFactory[] {
-    new TBinaryProtocol.Factory(), 
-    new TCompactProtocol.Factory(), 
+    new TBinaryProtocol.Factory(),
+    new TCompactProtocol.Factory(),
     new TJSONProtocol.Factory()
   };
 
@@ -108,19 +109,19 @@ public class TestTDeserializer extends TestCase {
     }
   }
 
-  public static void testPartialDeserialize(TProtocolFactory protocolFactory, TBase input, TBase output, TBase expected, TFieldIdEnum fieldIdPathFirst, TFieldIdEnum ... fieldIdPathRest) throws TException {
+  public static void testPartialDeserialize(TProtocolFactory protocolFactory, TImmutableBase input, TBase output, TImmutableBase expected, TFieldIdEnum fieldIdPathFirst, TFieldIdEnum ... fieldIdPathRest) throws TException {
     byte[] record = serialize(input, protocolFactory);
     TDeserializer deserializer = new TDeserializer(protocolFactory);
     for (int i = 0; i < 2; i++) {
       TBase outputCopy = output.deepCopy();
       deserializer.partialDeserialize(outputCopy, record, fieldIdPathFirst, fieldIdPathRest);
-      assertEquals("on attempt " + i + ", with " + protocolFactory.toString() 
+      assertEquals("on attempt " + i + ", with " + protocolFactory.toString()
           + ", expected " + expected + " but got " + outputCopy,
           expected, outputCopy);
     }
   }
 
-  private static byte[] serialize(TBase input, TProtocolFactory protocolFactory) throws TException{
+  private static byte[] serialize(TImmutableBase input, TProtocolFactory protocolFactory) throws TException{
     return new TSerializer(protocolFactory).serialize(input);
   }
 }

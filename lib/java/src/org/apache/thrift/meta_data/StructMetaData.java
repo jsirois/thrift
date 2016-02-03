@@ -19,13 +19,13 @@
 
 package org.apache.thrift.meta_data;
 
-import org.apache.thrift.TBase;
+import org.apache.thrift.TImmutableBase;
 
 public class StructMetaData extends FieldValueMetaData {
-  public final Class<? extends TBase> structClass;
-  
-  public StructMetaData(byte type, Class<? extends TBase> sClass){
+  public final Class<? extends TImmutableBase> structClass;
+
+  public StructMetaData(byte type, Class<? extends TImmutableBase> sClass){
     super(type);
     this.structClass = sClass;
-  }    
+  }
 }

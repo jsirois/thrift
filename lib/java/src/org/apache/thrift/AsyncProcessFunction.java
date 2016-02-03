@@ -20,7 +20,6 @@ package org.apache.thrift;
 
 import org.apache.thrift.async.AsyncMethodCallback;
 import org.apache.thrift.protocol.TMessage;
-import org.apache.thrift.protocol.TMessageType;
 import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.server.AbstractNonblockingServer;
 
@@ -43,7 +42,7 @@ public abstract class AsyncProcessFunction<I, T, R> {
         return methodName;
     }
 
-    public void sendResponse(final AbstractNonblockingServer.AsyncFrameBuffer fb, final TBase result, final byte type, final int seqid) throws TException {
+    public void sendResponse(final AbstractNonblockingServer.AsyncFrameBuffer fb, final TImmutableBase result, final byte type, final int seqid) throws TException {
         TProtocol oprot = fb.getOutputProtocol();
 
         oprot.writeMessageBegin(new TMessage(getMethodName(), type, seqid));
