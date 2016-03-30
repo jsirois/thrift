@@ -213,7 +213,7 @@ func (p *ThriftTestDriver) Start() {
 		2: {thrifttest.Numberz_SIX: crazyEmpty},
 	}
 	if r, err := client.TestInsanity(crazy); !reflect.DeepEqual(r, insanity) || err != nil {
-		t.Fatal("TestInsanity failed")
+		t.Fatalf("TestInsanity failed r: {} insanity: {} err: {}", r, insanity, err)
 	}
 
 	if err := client.TestException("TException"); err == nil {

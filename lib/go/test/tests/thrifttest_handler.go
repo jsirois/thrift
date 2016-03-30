@@ -155,11 +155,11 @@ func (p *ThriftTestHandler) TestInsanity(argument *thrifttest.Insanity) (r map[t
 	looney := thrifttest.NewInsanity()
 	second_map[thrifttest.Numberz_SIX] = looney
 
-	var insane = make(map[thrifttest.UserId]map[thrifttest.Numberz]*thrifttest.Insanity)
-	insane[1] = first_map
-	insane[2] = second_map
+	r = make(map[thrifttest.UserId]map[thrifttest.Numberz]*thrifttest.Insanity)
+	r[1] = first_map
+	r[2] = second_map
 
-	return insane, nil
+	return
 }
 
 func (p *ThriftTestHandler) TestMulti(arg0 int8, arg1 int32, arg2 int64, arg3 map[int16]string, arg4 thrifttest.Numberz, arg5 thrifttest.UserId) (r *thrifttest.Xtruct, err error) {

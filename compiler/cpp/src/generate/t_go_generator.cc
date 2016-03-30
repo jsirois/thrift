@@ -3170,6 +3170,12 @@ void t_go_generator::generate_serialize_container(ofstream& out,
   if (pointer_field) {
     prefix = "*" + prefix;
   }
+  
+  out << "if " << prefix << " == nil {" << endl;
+  out << "  fmt.Println(\"" << prefix << " is nil, not serializing it: {}\", " << prefix << ")" << endl;
+  out << "  return nil" << endl;
+  out << "}" << endl;
+
   if (ttype->is_map()) {
     out << indent() << "if err := oprot.WriteMapBegin("
         << type_to_enum(((t_map*)ttype)->get_key_type()) << ", "
